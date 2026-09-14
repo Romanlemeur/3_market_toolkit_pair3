@@ -9,8 +9,8 @@ Component B of MSA-DATI07-01 · Python Environments and Engineering Workflows.
 <!-- TODO (both partners): add your names below, one line each. -->
 <!-- This is one of the shared files — you WILL hit a merge conflict here. That is expected. -->
 
-- Partner A: _your name here_
-- Partner B: _your name here_
+- Partner A: Roman Le Meur
+- Partner B: Ghali LAALIAOUI
 
 ## Setup
 
