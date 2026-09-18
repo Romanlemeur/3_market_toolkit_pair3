@@ -14,22 +14,44 @@ Component B of MSA-DATI07-01 · Python Environments and Engineering Workflows.
 
 ## Setup
 
-<!-- TODO (Partner A): write the exact commands a new teammate would run to get -->
-<!-- from a fresh clone to a working environment. Assume they have Python 3.11+. -->
+```bash
+git clone <repo-url>
+cd market-toolkit
+python -m venv .venv
+source .venv/bin/activate       # macOS / Linux / Git Bash on Windows
+pip install -r requirements.txt
+pytest tests/ -v
+```
 
 ## How to run
 
-<!-- TODO (Partner B): describe how to run  scripts/fetch_prices.sh  and  src/demo.py . -->
-<!-- Include what output files each command produces. -->
+**`scripts/fetch_prices.sh`** — validates `data/raw/` and prints a summary of
+each ticker's row count.
+
+```bash
+./scripts/fetch_prices.sh
+```
+
+- On success: prints the summary and writes it to `logs/fetch_YYYY-MM-DD.log`, exit 0.
+- On failure (missing/empty `data/raw/`): prints an error to stderr, exit 1.
+
+**`src/demo.py`** — loads all prices, computes return metrics per ticker, and
+plots cumulative returns.
+
+```bash
+python -m src.demo
+```
+
+- Prints one summary line per ticker (Sharpe ratio, max drawdown, final cumulative return).
+- Saves `outputs/cumulative_returns.png`.
+- Status: in progress (Partner B) — not yet runnable.
 
 ## Structure
 
-<!-- TODO (both): describe what each folder is for. Keep it short — 1 line each. -->
-
-- `data/raw/` —
-- `src/` —
-- `scripts/` —
-- `tests/` —
+- `data/raw/` — one CSV per ticker (`date`, `close`), the raw input data.
+- `src/` — the toolkit: `ingest.py` (load/clean CSVs), `metrics.py` (return metrics), `demo.py` (runnable pipeline demo).
+- `scripts/` — operational shell scripts, e.g. `fetch_prices.sh` for the daily data summary/log.
+- `tests/` — pytest suite defining the contract for `src/`.
 
 ## Development workflow
 
