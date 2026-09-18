@@ -1,7 +1,3 @@
-# Direct dependencies only. Pin loosely (>=) unless you have a reason to pin exactly.
-# Add your own dependencies below as you need them, in alphabetical order.
-
 matplotlib>=3.7
-numpy>=1.24
 pandas>=2.0
 pytest>=7.0
