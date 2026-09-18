@@ -64,3 +64,29 @@ Every change goes through a Pull Request. `main` stays green.
 3. Push, open a PR against `main`
 4. Your partner reviews. You iterate. You merge when both are happy.
 5. Never push directly to `main`.
+
+## Note on our workflow vs. TASK.md
+
+We didn't see `TASK.md` until after most of the implementation was already
+done, it wasn't something we'd read closely at the start, so we worked from
+the code's own TODO comments and the test suite instead.
+
+Before we went back and read it properly, we used the branching workflow
+we're both already used to from other projects: a `dev` integration branch,
+with feature branches (`features_ingest`, `features_fetch_prices`, `metrics`,
+`demo.py`) opened as PRs against `dev`, and `dev` merged into `main` via one
+final PR once everything was green. `TASK.md` actually asks for every feature
+branch to be opened directly against `main`. We kept our habitual `dev`-branch
+flow because it's the review process we're both comfortable with, and by the
+time we reread `TASK.md`, several PRs were already merged that way — we
+judged that unpicking merged, passing history just to match the exact branch
+target wasn't worth it.
+
+One exception, and we want to be upfront about it: commit `e63f3c6`
+("update of the name on the README") was pushed directly to `main`, before
+any feature branch existed. That commit only filled in the two partners'
+names in the Team section above — it wasn't a code change — but it was still
+a direct commit to `main`, which the workflow rules above explicitly say not
+to do. Apologies for that one. We're flagging it here instead of quietly
+leaving it in the history, and from this point on even a one-line README fix
+goes through a branch and a PR like everything else.
