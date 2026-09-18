@@ -38,11 +38,11 @@ def daily_returns(prices):
     pandas.Series
         Daily returns. Length is  len(prices) - 1  after dropping the leading NaN.
     """
-    # TODO 1: use  prices.pct_change()  — pandas does the (p_t / p_{t-1}) - 1 for you
+    # Percent change from the previous row — this is exactly r_t
+    returns = prices.pct_change()
 
-    # TODO 2: drop the leading NaN with  .dropna()  and return the result
-
-    raise NotImplementedError("daily_returns")
+    # First row has no previous price, so it's NaN — drop it
+    return returns.dropna()
 
 
 def cumulative_returns(returns):
@@ -63,10 +63,8 @@ def cumulative_returns(returns):
     pandas.Series
         Cumulative returns.
     """
-    # TODO: return  (1 + returns).cumprod() - 1
-    # Yes, it really is one line.
-
-    raise NotImplementedError("cumulative_returns")
+    # Compound the daily growth factors, then subtract the starting 1.0
+    return (1 + returns).cumprod() - 1
 
 
 def annualized_volatility(returns, periods_per_year=252):
@@ -87,12 +85,11 @@ def annualized_volatility(returns, periods_per_year=252):
     -------
     float
     """
-    # TODO 1: compute the daily standard deviation with  returns.std()
+    # Daily standard deviation of returns
+    daily_std = returns.std()
 
-    # TODO 2: multiply by  np.sqrt(periods_per_year)  and return as a float
-    #         HINT: wrap in  float(...)  so tests get a plain float, not a numpy scalar
-
-    raise NotImplementedError("annualized_volatility")
+    # Scale to annual volatility using the sqrt-of-time rule
+    return float(daily_std * np.sqrt(periods_per_year))
 
 
 def sharpe_ratio(returns, risk_free_rate=0.02, periods_per_year=252):
@@ -114,16 +111,14 @@ def sharpe_ratio(returns, risk_free_rate=0.02, periods_per_year=252):
     -------
     float
     """
-    # TODO 1: compute the annualized mean return
-    #         annual_mean = returns.mean() * periods_per_year
+    # Annualize the mean daily return
+    annual_mean = returns.mean() * periods_per_year
 
-    # TODO 2: compute the annualized volatility
-    #         HINT: you already wrote a function for this — call it!
-    #         annual_vol = annualized_volatility(returns, periods_per_year)
+    # Reuse the volatility function already written above
+    annual_vol = annualized_volatility(returns, periods_per_year)
 
-    # TODO 3: return  (annual_mean - risk_free_rate) / annual_vol  as float
-
-    raise NotImplementedError("sharpe_ratio")
+    # Excess return per unit of risk
+    return float((annual_mean - risk_free_rate) / annual_vol)
 
 
 def max_drawdown(cum_returns):
