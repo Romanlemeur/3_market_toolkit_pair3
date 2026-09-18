@@ -44,7 +44,6 @@ python -m src.demo
 
 - Prints one summary line per ticker (Sharpe ratio, max drawdown, final cumulative return).
 - Saves `outputs/cumulative_returns.png`.
-- Status: in progress (Partner B) — not yet runnable.
 
 ## Structure
 
