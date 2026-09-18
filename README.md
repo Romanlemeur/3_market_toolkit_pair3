@@ -23,6 +23,8 @@ pip install -r requirements.txt
 pytest tests/ -v
 ```
 
+All 25 tests pass (`tests/test_ingest.py` + `tests/test_metrics.py`).
+
 ## How to run
 
 **`scripts/fetch_prices.sh`** — validates `data/raw/` and prints a summary of
@@ -44,7 +46,7 @@ python -m src.demo
 
 - Prints one summary line per ticker (Sharpe ratio, max drawdown, final cumulative return).
 - Saves `outputs/cumulative_returns.png`.
-- Status: in progress (Partner B) — not yet runnable.
+- Status: done — runs end-to-end (`ingest.py` + `metrics.py` + `demo.py` all implemented).
 
 ## Structure
 
